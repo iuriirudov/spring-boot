@@ -43,11 +43,11 @@ public class HelloController {
         return "<form method='POST'>" +
                 "<input type='text' name='name'>" +
                 "<select name='language'>" +
-                "<option value='english' default>English</option>" +
-                "<option value='russian'>Russian</option>" +
-                "<option value='french'>French</option>" +
-                "<option value='german'>German</option>" +
-                "<option value='italian'>Italian</option>" +
+                "<option value='0' default>English</option>" +
+                "<option value='1'>Russian</option>" +
+                "<option value='2'>French</option>" +
+                "<option value='3'>German</option>" +
+                "<option value='4'>Italian</option>" +
                 "</select>" +
                 "<button type='submit'>Send</button>" +
                 "</form>";
@@ -56,19 +56,19 @@ public class HelloController {
     // POST method response
     @PostMapping("hello-forms")
     @ResponseBody
-    public String createMessage(@RequestParam String name, String language) { // parameters from the client request;
+    public String createMessage(@RequestParam String name, int language) { // parameters from the client request;
         String hello = "Hello";
         switch (language) {
-            case "russian":
+            case 1:
                 hello = "Привет";
                 break;
-            case "french":
+            case 2:
                 hello = "Bonjour";
                 break;
-            case "german":
+            case 3:
                 hello = "Hallo";
                 break;
-            case "italian":
+            case 4:
                 hello = "Ciao";
                 break;
         }
