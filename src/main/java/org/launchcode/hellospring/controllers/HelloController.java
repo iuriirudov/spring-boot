@@ -1,4 +1,4 @@
-package org.launchcode.hellospring.comtrollers;
+package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +40,41 @@ public class HelloController {
     @GetMapping("hello-forms")
     @ResponseBody
     public String helloForms() {
-        return "<form method='POST'><input type='text' name='name'><button type='submit'>Send</button></form>";
+        return "<form method='POST'>" +
+                "<input type='text' name='name'>" +
+                "<select name='language'>" +
+                "<option value='english' default>English</option>" +
+                "<option value='russian'>Russian</option>" +
+                "<option value='french'>French</option>" +
+                "<option value='german'>German</option>" +
+                "<option value='italian'>Italian</option>" +
+                "</select>" +
+                "<button type='submit'>Send</button>" +
+                "</form>";
     }
 
     // POST method response
     @PostMapping("hello-forms")
     @ResponseBody
-    public String helloForms(@RequestParam String name) { // parameters from the client request
-        return "Hello, " + name + "!";
+    public String createMessage(@RequestParam String name, String language) { // parameters from the client request;
+        String hello = "Hello";
+        switch (language) {
+            case "russian":
+                hello = "Привет";
+                break;
+            case "french":
+                hello = "Bonjour";
+                break;
+            case "german":
+                hello = "Hallo";
+                break;
+            case "italian":
+                hello = "Ciao";
+                break;
+        }
+
+        return "<h1 style='text-align: center;'>" +
+                "" + hello + ", " + name + "!" +
+                "</h1>";
     }
 }
